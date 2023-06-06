@@ -24,6 +24,20 @@ describe("Todo page", () => {
     cy.contains('Water the plants').should('be.visible');
   });
 
+  it("should edit a todo item", () => {
+    addItem("Walk the car");
+    
+    // sanity: find the label with the text 'walk the car'
+    cy.contains('Walk the car').should('be.visible');
+
+    // find the label with the text 'walk the car', then double-click it,
+    // then type 'walk the cat' and press enter
+    cy.contains('Walk the car').dblclick();
+    cy.get(".edit").type('{backspace}{backspace}{backspace}cat{enter}');
+
+    cy.contains('Walk the car').should('not.exist');
+  });
+
   it("should check 'walk the dog' as completed", () => {
     // find the label with the text 'walk the dog'
     // then find the parent of the label which is the <li> element
