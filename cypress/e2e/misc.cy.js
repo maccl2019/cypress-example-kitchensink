@@ -1,7 +1,9 @@
 describe("Misc page", () => {
 
   beforeEach(() => {
-    cy.visit("http://localhost:8080/commands/misc");
+    cy.visit("http://localhost:8080");
+    cy.contains("Commands").click();
+    cy.contains("Misc").click();
   });
 
   it("should assert correct URL", () => {

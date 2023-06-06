@@ -1,11 +1,18 @@
 describe("Todo page", () => {
-
   const addItem = (item) => {
     cy.get('[data-test=new-todo]').type(`${item}{enter}`);
-  }
 
+  }
+  
   beforeEach(() => {
     cy.visit("http://localhost:8080/todo");
+    // cy.visit("https://example.cypress.io/todo");
+
+    // ok, for a bit of sanity, since there's a bug when adding stuff directly
+    // to the storage, let's add some items through the UI.
+    // right now, the todo items are not added immediately onload as 
+    // they should - check /app/assets/js/todo/app.js for more info.
+    // ["Pay electric bill", "Walk the dog"].forEach(addItem);
   });
 
   it("should add a new todo to the list", () => {
@@ -84,7 +91,7 @@ describe("Todo page", () => {
     cy.get('.todo-list').find('li').should('have.length', 5);
 
     // Let's clear all the completed items
-    cy.contains('Clear completed').click();
+    cy.contains('Clear completed').focus().click();
 
     // There should now be a total of three todo items in the list,
     // all previously unchecked.
@@ -92,14 +99,13 @@ describe("Todo page", () => {
   })
 
   it("should be able to toggle all the todo items", () => {
-    // test is finicky - sometimes the task "Walk the dog" wouldn't
-    // get checked, sometimes it does. No idea why.
-
     const todos = [
       "Get the groceries",
       "Feed the cat",
       "Water the plants"
     ]
+
+    // cy.get(".destroy").click({ multiple: true, force: true });
 
     todos.forEach(addItem);
 
@@ -113,7 +119,7 @@ describe("Todo page", () => {
     cy.contains("Clear completed").click()
 
     // At this point there should be no items in the list
-    cy.get('.todo-list').find('li').should('have.length', 0);
+    cy.get('.todo-list').children().should('have.length', 0);
   })
 
 });

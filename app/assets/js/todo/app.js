@@ -28,10 +28,12 @@
     setView()
 
     // initialize with 2 items
+    // A bit buggy. Doing this on the testing side instead.
+    // TODO fix bug with 'walk the dog' being inconsistent on toggling 'completed' state
     todo.storage.findAll((data) => {
       if (!data.length) {
         todo.controller.addItem('Pay electric bill')
-        todo.controller.addItem('Walk the dog')
+        todo.controller.addItem('Walk the dog')    
       }
     })
   }

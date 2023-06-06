@@ -100,7 +100,8 @@
       callback.call(this, todos)
     } else {
       // Generate an ID
-      updateData.id = new Date().getTime()
+      // updateData.id = new Date().getTime()
+      updateData.id = Math.floor(Math.random() * 1000000000000000000)
 
       todos.push(updateData)
       localStorage.setItem(this._dbName, JSON.stringify(todos))
