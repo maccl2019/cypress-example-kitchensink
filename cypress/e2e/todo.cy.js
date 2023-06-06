@@ -13,6 +13,8 @@ describe("Todo page", () => {
     // right now, the todo items are not added immediately onload as 
     // they should - check /app/assets/js/todo/app.js for more info.
     // ["Pay electric bill", "Walk the dog"].forEach(addItem);
+
+    // post-note: in this activity, tests are ok to fail.
   });
 
   it("should add a new todo to the list", () => {
